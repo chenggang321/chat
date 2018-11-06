@@ -2,6 +2,13 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import {increment, decrement, async} from './index.redux'
 
+
+@connect(
+    // 传入参数
+    state=>({num: state}),
+    // 传入方法
+    {increment, decrement, async}
+)
 class App extends Component {
     render() {
         return (
@@ -15,15 +22,4 @@ class App extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        num: state
-    }
-}
-
-const mapDispatchToProps = {increment,decrement,async}
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(App)
+export default App
