@@ -1,28 +1,18 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import {increment, decrement} from './index.redux'
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+    render() {
+        const store = this.props.store
+        const num = store.getState()
+        return (
+            <div>
+                <h1>Hello World! {num}</h1>
+                <button onClick={() => store.dispatch(increment())}>增加</button>
+                <button onClick={() => store.dispatch(decrement())}>减少</button>
+            </div>
+        );
+    }
 }
 
 export default App;
