@@ -5,7 +5,7 @@ import {increment, decrement, async} from './index.redux'
 
 @connect(
     // 传入参数
-    state=>({num: state}),
+    state=>({num: state.counter}),
     // 传入方法
     {increment, decrement, async}
 )
