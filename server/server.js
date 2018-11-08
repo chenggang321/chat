@@ -29,6 +29,17 @@ app.get("/", function (req, res) {
     res.send("<h1>Hello World</h1>");
 });
 
+app.get('/data',function(req,res){
+    res.json({
+        user:'admin',
+        isAuth:false,
+        age:27
+    })
+})
+
+app.listen(8081,function(){
+    console.log('server at:http://localhost:8081')
+})
 app.get("/data", function (req, res) {
     User.find({}, function (err, doc) {
         res.json(doc);
