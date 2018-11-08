@@ -39,7 +39,6 @@ class Register extends Component {
     }
 
     handleRegister() {
-        console.log(this.state)
         this.props.register(this.state)
     }
 

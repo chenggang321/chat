@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore, applyMiddleware} from 'redux'
+import {createStore, applyMiddleware,compose} from 'redux'
 import thunk from 'redux-thunk'
 import {Provider} from 'react-redux'
 import {
@@ -17,10 +17,18 @@ import Register from './container/register/register'
 import AuthRoute from './component/authRoute/authRoute'
 import './index.css'
 
-const store = createStore(reducers, applyMiddleware(thunk))
-function Boss(){
+const store = createStore(
+    reducers,
+    compose(
+        applyMiddleware(thunk),
+        window.devToolsExtension ? window.devToolsExtension() : f => f
+    )
+)
+
+function Boss() {
     return <h2>Boss页面</h2>
 }
+
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
