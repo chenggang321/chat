@@ -19,11 +19,11 @@ class Dashboard extends Component {
                 {this.props.isAuth ?
                     <button onClick={this.props.logout}>注销</button> : null}
                 <ul>
-                    <li><Link to={`${match.url}/`}>首页</Link></li>
+                    <li><Link to={`${match.url}`}>首页</Link></li>
                     <li><Link to={`${match.url}/tabOne`}>导航一</Link></li>
                     <li><Link to={`${match.url}/tabTwo`}>导航二</Link></li>
                 </ul>
-                <Route path={`${match.url}/`} exact component={App}/>
+                <Route path={`${match.url}`} exact component={App}/>
                 <Route path={`${match.url}/tabOne`} component={TabOne}/>
                 <Route path={`${match.url}/tabTwo`} component={TabTwo}/>
             </div>
