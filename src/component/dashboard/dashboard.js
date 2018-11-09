@@ -1,52 +1,83 @@
 import React, {Component} from 'react'
-import {Route,Switch} from 'react-router-dom'
-import { NavBar,TabBar } from 'antd-mobile'
+import {Route, Switch} from 'react-router-dom'
+import {NavBar} from 'antd-mobile'
+import {connect} from 'react-redux'
+import NavLinkBar from '../navLinkBar/navLinkBar'
 
 
-
-function Boss(){
-    return <h2>Boss</h2>
+function Boss() {
+    return <div style={{height:'400px'}}>Boss</div>
 }
-function User(){
+
+function User() {
     return <h2>User</h2>
 }
+
+function Msg() {
+    return <h2>Msg</h2>
+}
+
+function Home() {
+    return <h2>Home</h2>
+}
+
+@connect(
+    state => state
+)
 class Dashboard extends Component {
+    constructor(props){
+        super(props)
+        this.state={
+            fullScreen: false,
+        }
+    }
     render() {
+        const {pathname} = this.props.location
+        const user = this.props.user
+        const navList = [
+            {
+                path: '/boss',
+                text: '牛人',
+                icon: 'icon-UserSettings',
+                title: '牛人列表',
+                component: Boss,
+                hide: user.type === 'user'
+            },
+            {
+                path: '/user',
+                text: 'boss',
+                icon: 'icon-boss',
+                title: 'Boss列表',
+                component: User,
+                hide: user.type === 'boss'
+            },
+            {
+                path: '/msg',
+                text: '消息',
+                icon: 'icon-msg',
+                title: '消息列表',
+                component: Msg
+            },
+            {
+                path: '/me',
+                text: '我',
+                icon: 'icon-home',
+                title: '个人中心',
+                component: Home
+            }
+        ]
         return (
-            <div>
+            <div style={this.state.fullScreen ? { position: 'fixed', height: '100%', width: '100%', top: 0 } : { height: 400 }}>
                 <NavBar
                     mode="dark"
-                >Head</NavBar>
+                >{navList.find(v => v.path === pathname).title}</NavBar>
                 <Switch>
                     <Route path='/boss' component={Boss}/>
                     <Route path='/user' component={User}/>
+                    <Route path='/msg' component={Msg}/>
+                    <Route path='/me' component={Home}/>
                 </Switch>
-                <TabBar
-                    unselectedTintColor="#949494"
-                    tintColor="#33A3F4"
-                    barTintColor="white"
-                    tabBarPosition="top"
-                >
-                    <TabBar.Item
-                        title="Life"
-                        key="Life"
-                        icon={<div style={{
-                            width: '22px',
-                            height: '22px',
-                            background: 'url(https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg) center center /  21px 21px no-repeat' }}
-                        />
-                        }
-                        selectedIcon={<div style={{
-                            width: '22px',
-                            height: '22px',
-                            background: 'url(https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg) center center /  21px 21px no-repeat' }}
-                        />
-                        }
-                        badge={1}
-                        data-seed="logId"
-                    >
-                    </TabBar.Item>
-                </TabBar>
+                <NavLinkBar data={navList}/>
             </div>
         )
     }
