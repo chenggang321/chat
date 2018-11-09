@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore, applyMiddleware,compose} from 'redux'
+import {createStore, applyMiddleware, compose} from 'redux'
 import thunk from 'redux-thunk'
 import {Provider} from 'react-redux'
 import {
     BrowserRouter,
     Route,
     // Redirect,
-    // Switch
+    Switch
 } from 'react-router-dom'
 
 import reducers from './reducers'
@@ -16,6 +16,9 @@ import Login from './container/login/login'
 import Register from './container/register/register'
 import AuthRoute from './component/authRoute/authRoute'
 import './index.css'
+import BossInfo from './container/bossInfo/bossInfo'
+import UserInfo from './container/userInfo/userInfo'
+import Dashboard from './component/dashboard/dashboard'
 
 const store = createStore(
     reducers,
@@ -25,18 +28,19 @@ const store = createStore(
     )
 )
 
-function Boss() {
-    return <h2>Boss页面</h2>
-}
-
+// boss user me msg 4个页面
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
             <div>
                 <AuthRoute/>
-                <Route path="/login" component={Login}/>
-                <Route path="/register" component={Register}/>
-                <Route path="/boss" component={Boss}/>
+                <Switch>
+                    <Route path="/login" component={Login}/>
+                    <Route path="/register" component={Register}/>
+                    <Route path="/bossInfo" component={BossInfo}/>
+                    <Route path="/userInfo" component={UserInfo}/>
+                    <Route component={Dashboard}/>
+                </Switch>
             </div>
         </BrowserRouter>
     </Provider>,
