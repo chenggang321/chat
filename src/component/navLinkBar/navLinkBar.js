@@ -18,8 +18,14 @@ class NavLinkBar extends Component {
                     <TabBar.Item
                         key={v.path}
                         title={v.text}
-                        icon={<i style={{fontSize:25}} className={`icon iconfont ${v.icon}`}></i>}
-                        selectedIcon={<i style={{fontSize:25,color:'rgb(16, 142, 233)'}} className={`icon iconfont ${v.icon}`}></i>}
+                        icon={<i
+                            style={{fontSize:25}}
+                            className={`icon iconfont ${v.icon}`}
+                        />}
+                        selectedIcon={<i
+                            style={{fontSize:25,color:'rgb(16, 142, 233)'}}
+                            className={`icon iconfont ${v.icon}`}
+                        />}
                         selected={pathname === v.path}
                         onPress={()=>{
                             this.props.history.push(v.path)

@@ -3,22 +3,12 @@ import {Route, Switch} from 'react-router-dom'
 import {NavBar} from 'antd-mobile'
 import {connect} from 'react-redux'
 import NavLinkBar from '../navLinkBar/navLinkBar'
-
-
-function Boss() {
-    return <div style={{height:'400px'}}>Boss</div>
-}
-
-function User() {
-    return <h2>User</h2>
-}
+import Boss from '../boss/boss'
+import User from '../user/user'
+import Home from '../home/home'
 
 function Msg() {
     return <h2>Msg</h2>
-}
-
-function Home() {
-    return <h2>Home</h2>
 }
 
 @connect(
@@ -66,17 +56,20 @@ class Dashboard extends Component {
                 component: Home
             }
         ]
+        const currentNavList = navList.find(v => v.path === pathname)
         return (
             <div>
                 <NavBar
                     mode="dark"
-                >{navList.find(v => v.path === pathname).title}</NavBar>
-                <Switch>
-                    <Route path='/boss' component={Boss}/>
-                    <Route path='/user' component={User}/>
-                    <Route path='/msg' component={Msg}/>
-                    <Route path='/me' component={Home}/>
-                </Switch>
+                    className="fixed-header"
+                >{currentNavList.title}</NavBar>
+                <div style={{marginTop:45}}>
+                    <Switch>
+                        {navList.map(v=>(
+                            <Route key={v.path} path={v.path} component={v.component}/>
+                        ))}
+                    </Switch>
+                </div>
                 <NavLinkBar data={navList}/>
             </div>
         )
