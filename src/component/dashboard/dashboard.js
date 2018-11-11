@@ -6,13 +6,14 @@ import NavLinkBar from '../navLinkBar/navLinkBar'
 import Boss from '../boss/boss'
 import User from '../user/user'
 import Home from '../home/home'
+import {getMsgList,recvMsg} from "../../redux/chat.redux"
+import Msg from '../msg/msg'
 
-function Msg() {
-    return <h2>Msg</h2>
-}
 
 @connect(
-    state => state
+    state => state,
+    {getMsgList,recvMsg}
+
 )
 class Dashboard extends Component {
     constructor(props){
@@ -21,6 +22,14 @@ class Dashboard extends Component {
             fullScreen: false,
         }
     }
+
+    componentDidMount() {
+        if(!this.props.chat.chatmsg.length){
+            this.props.getMsgList()
+            this.props.recvMsg()
+        }
+    }
+
     render() {
         const {pathname} = this.props.location
         const user = this.props.user

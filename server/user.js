@@ -6,20 +6,32 @@ const User = model.getModel('user')
 const Chat = model.getModel('chat')
 const _filter = {pwd:0,__v:0}
 
+// Chat.remove({},function(e,d){
+//     console.log('remove chat data')
+// })
+
+// User.remove({},function(e,d){
+//      console.log('remove user data')
+// })
+
 Router.get('/list',function(req,res){
     const {type} = req.query
-    // User.remove({},function(e,d){})
     User.find({type},function(err,doc){
         return res.json({code:0,data:doc})
     })
 })
 Router.get('/getmsglist',function(req,res){
-    const user = req.cookies.userId
-    // {$or:[{from:user,to:user}]}
-    Chat.find({},function(err,doc){
-        if(!err){
-            return res.json({code:0,msgs:doc})
-        }
+    const user = req.cookies.userid
+    User.find({},function(e,d){
+        let users = {}
+        d.forEach(function (item) {
+            users[item._id] = {name:item.user,avatar:item.avatar}
+        })
+        Chat.find({'$or':[{from:user},{to:user}]},function(err,doc){
+            if(!err){
+                return res.json({code:0,msgs:doc,users:users})
+            }
+        })
     })
 })
 Router.post('/update',function(req,res){
