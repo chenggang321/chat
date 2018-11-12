@@ -41,6 +41,7 @@ ReactDOM.render(
                     <Route path="/bossInfo" component={BossInfo}/>
                     <Route path="/userInfo" component={UserInfo}/>
                     <Route path="/chat/:user" component={Chat}/>
+                    {/*<Redirect path="/" to="/login"/>*/}
                     <Route component={Dashboard}/>
                 </Switch>
             </div>
