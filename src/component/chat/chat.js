@@ -32,11 +32,10 @@ class Chat extends Component {
             this.props.recvMsg()
         }
         const to = this.props.match.params.user
-        console.log(to)
         this.props.readMsg(to)
     }
     componentWillUnmount(){
-        console.log('unmount')
+
     }
     fixCarousel(){
         setTimeout(() => {
