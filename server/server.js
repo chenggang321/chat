@@ -10,7 +10,7 @@ app.use(cookieParser())
 app.use(bodyParse.json())
 app.use('/user',userRouter)
 
-app.listen(8081,function(){
+app.listen(8082,function(){
     console.log('server at:http://localhost:8081')
 })
 
@@ -29,4 +29,4 @@ io.on('connection', client => {
 
 });
 app.use(express.static('../build'))
-server.listen(9000);
+server.listen(9001);

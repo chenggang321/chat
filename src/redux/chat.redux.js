@@ -1,7 +1,8 @@
 import io from 'socket.io-client'
 import axios from 'axios'
 
-const socket = io('ws://localhost:9000', {transports: ['websocket']})
+const socket = io('ws://totrip.xin:9001', {transports: ['websocket']})
+// const socket = io('ws://localhost:9001', {transports: ['websocket']})
 
 // types
 const MSG_LIST = 'MSG_LIST'
