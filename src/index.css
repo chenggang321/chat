@@ -1,3 +1,6 @@
+body{
+    touch-action: none;
+}
 .err-msg{
     color:#f00;
     margin:0;

@@ -4,9 +4,9 @@ import {createStore, applyMiddleware, compose} from 'redux'
 import thunk from 'redux-thunk'
 import {Provider} from 'react-redux'
 import {
-    BrowserRouter,
+    // BrowserRouter,
+    HashRouter,
     Route,
-    // Redirect,
     Switch
 } from 'react-router-dom'
 
@@ -32,7 +32,7 @@ const store = createStore(
 // boss user me msg 4个页面
 ReactDOM.render(
     <Provider store={store}>
-        <BrowserRouter>
+        <HashRouter>
             <div>
                 <AuthRoute/>
                 <Switch>
@@ -41,11 +41,10 @@ ReactDOM.render(
                     <Route path="/bossInfo" component={BossInfo}/>
                     <Route path="/userInfo" component={UserInfo}/>
                     <Route path="/chat/:user" component={Chat}/>
-                    {/*<Redirect path="/" to="/login"/>*/}
                     <Route component={Dashboard}/>
                 </Switch>
             </div>
-        </BrowserRouter>
+        </HashRouter>
     </Provider>,
     document.getElementById('root')
 );

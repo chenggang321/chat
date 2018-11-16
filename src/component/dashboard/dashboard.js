@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Route, Switch} from 'react-router-dom'
+import {Route, Switch,Redirect} from 'react-router-dom'
 import {NavBar} from 'antd-mobile'
 import {connect} from 'react-redux'
 import NavLinkBar from '../navLinkBar/navLinkBar'
@@ -66,7 +66,7 @@ class Dashboard extends Component {
             }
         ]
         const currentNavList = navList.find(v => v.path === pathname)
-        return (
+        return currentNavList?(
             <div>
                 <NavBar
                     mode="dark"
@@ -81,7 +81,7 @@ class Dashboard extends Component {
                 </div>
                 <NavLinkBar data={navList}/>
             </div>
-        )
+        ):<Redirect to={'/login'}/>
     }
 }
 

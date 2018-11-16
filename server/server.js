@@ -32,4 +32,5 @@ io.on('connection', client => {
     })
 
 });
+app.use(express.static('../build'))
 server.listen(9000);
